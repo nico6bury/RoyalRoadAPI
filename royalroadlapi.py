@@ -58,7 +58,7 @@ def get_fiction(fiction_id,directory="Fictions/",start_chapter="first",end_chapt
         fiction_id = search_fiction(search_term) #perform a search and return the most likely fiction id
     if fiction_id:
         fiction_object = get_fiction_object(fiction_id) #collect a fiction object (fiction page)
-        get_fiction_info(fiction_object) #collect info from the fiction object
+        get_fiction_info(fiction_object, fiction_id) #collect info from the fiction object
         start_chapter,end_chapter,epub_index_start = get_chapter_range(start_chapter,end_chapter) #clarify and validate the chapter range
         chapter_links_approved = chapter_links[start_chapter:end_chapter] #remove excess chapters outside the range from the queue
         if chapter_links_approved != []: #if any chapter links remain
@@ -456,7 +456,7 @@ def get_fiction_location(fiction_id,directory="Fictions/",start_chapter="first",
         search_term = fiction_id #declare search_term
         fiction_id = search_fiction(search_term) #perform a search and return the most likely fiction_id
     fiction_object = get_fiction_object(fiction_id) #collect the fiction page html
-    get_fiction_info(fiction_object) #collect the data from the fiction page and store it in global variables
+    get_fiction_info(fiction_object, fiction_id) #collect the data from the fiction page and store it in global variables
     start_chapter,end_chapter,epub_index_start = get_chapter_range(start_chapter,end_chapter) #validate and return a chapter range
     chapter_links_approved = chapter_links[start_chapter:end_chapter] #trim off excess chapters outside the range from the queue
     downloading_chapter_amount = len(chapter_links_approved) #get the amount of chapters being downloaded
