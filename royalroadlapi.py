@@ -512,10 +512,10 @@ def request_soup(url):
         if e.code != 404: #and it is a 404
             request_soup(url) #retry
 
-def get_fiction_info(fiction_obj): #get fiction info and return and set global variables
+def get_fiction_info(fiction_obj, fiction_id): #get fiction info and return and set global variables
     global url,title,cover_image,author,description,genres,ratings,stats,chapter_links,chapter_amount #access global variables
     if fiction_obj: #if the fiction_obj is not empty
-        fiction_id = get_fiction_id(fiction_obj) #get the fiction id
+        fiction_id = fiction_id #get the fiction id
         url = "https://www.royalroad.com/fiction/"+str(fiction_id) #get the url
         title = get_fiction_title(fiction_obj) #get the title
         cover_image = get_fiction_cover_image(fiction_obj) #get the cover_image address
