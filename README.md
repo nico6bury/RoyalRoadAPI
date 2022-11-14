@@ -1,3 +1,7 @@
+This is a fork of the original repository with some changes I made in order to get things working on my machine. So far, I mostly have just added a function called initialise_headers(), which is supposed to be called before doing anything, as otherwise the global headers variable doesn't get initialized before it's used.
+
+The following is just a copy of the original README:
+
 # RoyalRoadLAPI
 A Python API to request and send data with the fanfiction website RoyalRoadL
 
