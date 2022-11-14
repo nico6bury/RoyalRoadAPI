@@ -947,6 +947,26 @@ def cloud_flare_bypass():
     driver.close()
     return headers
 
+def initialise_headers():
+    global headers
+    WINDOW_SIZE = "1920,1080"
+
+    chrome_options = Options()  
+    chrome_options.add_argument("--headless")
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
+    chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
+    chrome_options.add_argument("user-agent="+user_agent)
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get("https://www.royalroad.com/")
+    driver.get_screenshot_as_file("capture.png")
+    #html = driver.page_source
+    cookies = " ".join([c["name"]+"="+c["value"]+";" for c in driver.get_cookies()])
+    headers = {"user-agent":user_agent, "cookie":cookies}
+    driver.close()
+    return headers
+
 def handle_chapter_response(response): #asynchronously handle the chapter responses
     global i,chapters_downloaded,chapters_html,fiction_html,directory,http_client #access global variables
     if response.code == 599: #if the request failed (timeout or 404)
